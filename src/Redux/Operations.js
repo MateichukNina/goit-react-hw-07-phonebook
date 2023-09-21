@@ -1,11 +1,11 @@
 
 
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import * as contactsAPI from './API'; // Здесь подставьте путь к вашему API
+import * as API from './API'; 
 
 export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
   try {
-    const response = await contactsAPI.fetchContacts(); 
+    const response = await API.fetchContacts(); 
     return response.data;
   } catch (error) {
     throw error;
@@ -14,7 +14,7 @@ export const fetchContacts = createAsyncThunk('contacts/fetchAll', async () => {
 
 export const addContact = createAsyncThunk('contacts/addContact', async (contact) => {
   try {
-    const response = await contactsAPI.addContact(contact);
+    const response = await API.addContact(contact);
     return response.data;
   } catch (error) {
     throw error;
@@ -23,7 +23,7 @@ export const addContact = createAsyncThunk('contacts/addContact', async (contact
 
 export const deleteContact = createAsyncThunk('contacts/deleteContact', async (contactId) => {
   try {
-    await contactsAPI.deleteContact(contactId); 
+    await API.deleteContact(contactId); 
     return contactId;
   } catch (error) {
     throw error;

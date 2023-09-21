@@ -7,7 +7,21 @@ export const fetchContacts = async () => {
   return response.data;
 };
 
+// export const addContact = async (contact) => {
+//   const response = await axios.post(`${BASE_URL}/contacts`, contact);
+//   return response.data;
+// };
+
 export const addContact = async (contact) => {
+ 
+  if (!contact || Object.keys(contact).length === 0) {
+    throw new Error('Enter contact');
+  }
+
+  if (!contact.name || !contact.number) {
+    throw new Error('The contact must contain the name and number fields');
+  }
+
   const response = await axios.post(`${BASE_URL}/contacts`, contact);
   return response.data;
 };

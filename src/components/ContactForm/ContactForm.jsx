@@ -29,10 +29,10 @@ export const ContactForm = () => {
 
   const handleAddContact = async (values, { resetForm }) => {
     try {
-      // Вызываем операцию для добавления контакта
+    
       await dispatch(addContact({ ...values, id: nanoid() }));
       resetForm();
-      // После успешного добавления, обновляем список контактов
+     
       dispatch(fetchContacts());
     } catch (error) {
       console.error('Error adding contact:', error);
