@@ -1,28 +1,28 @@
 import { Item, List, DeleteBtn } from './ContactsList.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteContact} from 'Redux/Operations';
- import { selectVisibleContacts} from 'Redux/selectors';
-// import { useEffect } from 'react';
+ import {selectContacts, selectFilters } from 'Redux/selectors';
+ import { useEffect } from 'react';
 
-// import { setContacts } from 'Redux/ContactsSlise';
+import { setContacts } from 'Redux/ContactsSlise';
 
 export const ContactsList = () => {
-  const selectedContact = useSelector(selectVisibleContacts);
-  // const filters = useSelector(state => state.filter);
+  const contacts = useSelector(selectContacts);
+  const filters = useSelector(selectFilters);
   const dispatch = useDispatch();
 
   
 
 
-//   useEffect(() => {
+  useEffect(() => {
    
-//     dispatch(setContacts(contacts));
-//   }, [dispatch, contacts]);
+   dispatch(setContacts(contacts));
+   }, [dispatch, contacts]);
 
-//   const selectedContact = contacts.filter((contact) =>
-//   contact.name.toLowerCase().includes(filters)
-// );
-//   console.log(selectedContact)
+  const selectedContact = contacts.filter((contact) =>
+   contact.name.toLowerCase().includes(filters)
+ );
+   console.log('con', selectContacts)
 
   const handleDeleteContact = (contactId) => {
     dispatch(deleteContact(contactId));
