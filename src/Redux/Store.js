@@ -26,10 +26,13 @@ export const store = configureStore({
   reducer: {
     contacts: persistedContactsReducer,
     filter: filterReducer,
-  },
+  }
+   ,
   middleware: (getDefaultMiddleware) => {
-    const defaultMd = getDefaultMiddleware();
-    console.log(defaultMd);
+    const defaultMd = getDefaultMiddleware({
+      serializableCheck: false,
+    });
+    
     return [...defaultMd];
   },
 });

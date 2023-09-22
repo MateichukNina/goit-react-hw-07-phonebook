@@ -9,7 +9,7 @@ import {
   StyledLable,
   Button,
 } from './ContactForm.styled';
-import { addContact, fetchContacts} from 'Redux/Operations';
+import { addContact} from 'Redux/Operations';
 import { useDispatch } from 'react-redux';
 
 const ContactSchema = Yup.object().shape({
@@ -29,15 +29,18 @@ export const ContactForm = () => {
 
   const handleAddContact = async (values, { resetForm }) => {
     try {
-    
+  
       await dispatch(addContact({ ...values, id: nanoid() }));
       resetForm();
+  
+      // const response = await dispatch(fetchContacts());
      
-      dispatch(fetchContacts());
     } catch (error) {
       console.error('Error adding contact:', error);
     }
   };
+  
+ 
 
   return (
     <div>
