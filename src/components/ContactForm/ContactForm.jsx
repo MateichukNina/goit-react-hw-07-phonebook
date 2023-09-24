@@ -24,10 +24,6 @@ export const ContactForm = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
 
-  //  const handleAddContact = (values, { resetForm }) => {
-  //   dispatch(newContact({ ...values }));
-  //   resetForm();
-  // };
   
 
   const handleAddContact = async (values, { resetForm }) => {

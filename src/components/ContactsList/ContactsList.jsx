@@ -8,7 +8,6 @@ import { removeContact, fetchAllContacts} from 'Redux/Operations';
 
 export const ContactsList = () => {
    const selectedContact = useSelector(selectVisibleContacts);
-// const filters = useSelector(selectFilters);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,23 +15,6 @@ export const ContactsList = () => {
  }, [dispatch]);
 
 
-
-//  const selectedContact = contacts.filter((contact) =>
-//    contact.name.toLowerCase().includes(filters)
-//  );
-
-
-  // const handleDeleteContact = (id) => {
-  //    dispatch(removeContact(id));
-  //  };
-
-  // const handleDeleteContact = async (id) => {
-  //   try {
-  //     await dispatch(removeContact(id));
-  //   } catch (error) {
-  //     console.error('Error deleting contact:', error);
-  //   }
-  // };
 
   return (
     <List>
