@@ -1,33 +1,31 @@
 import { Item, List, DeleteBtn } from './ContactsList.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact} from 'Redux/Operations';
- import {selectContacts, selectFilters } from 'Redux/selectors';
- import { useEffect } from 'react';
+import {selectFilters, selectContacts} from 'Redux/selectors';
+import { useEffect } from 'react';
+import { fetchAllContacts, removeContact} from 'Redux/Operations';
 
-import { setContacts } from 'Redux/ContactsSlise';
+
 
 export const ContactsList = () => {
-  const contacts = useSelector(selectContacts);
-  const filters = useSelector(selectFilters);
+   const contacts = useSelector(selectContacts);
+const filters = useSelector(selectFilters);
   const dispatch = useDispatch();
 
-  
-
-
   useEffect(() => {
-   
-   dispatch(setContacts(contacts));
-   }, [dispatch, contacts]);
+    dispatch(fetchAllContacts());
+  }, [dispatch]);
 
-  const selectedContact = contacts.filter((contact) =>
+
+
+ const selectedContact = contacts.filter((contact) =>
    contact.name.toLowerCase().includes(filters)
  );
-   console.log('con', selectContacts)
 
-  const handleDeleteContact = (contactId) => {
-    dispatch(deleteContact(contactId));
-  };
-  console.log("Selected Contacts:", selectedContact);
+
+  // const handleDeleteContact = (contactId) => {
+  //    dispatch(removeContact(contactId));
+  // };
+
   return (
     <List>
       <ul>
@@ -37,7 +35,7 @@ export const ContactsList = () => {
               <p>
                 {contact.name}: {contact.number}
               </p>
-              <DeleteBtn onClick={() => handleDeleteContact(contact.id)}>
+              <DeleteBtn onClick={() => dispatch(removeContact(contact.id))}>
                 Delete
               </DeleteBtn>
             </Item>

@@ -1,5 +1,4 @@
 import { Formik } from 'formik';
-import { nanoid } from 'nanoid';
 import * as Yup from 'yup';
 
 import {
@@ -9,7 +8,7 @@ import {
   StyledLable,
   Button,
 } from './ContactForm.styled';
-import { addContact} from 'Redux/Operations';
+import { newContact} from 'Redux/Operations';
 import { useDispatch } from 'react-redux';
 
 const ContactSchema = Yup.object().shape({
@@ -22,23 +21,23 @@ const initialValues = { name: '', number: '' };
 export const ContactForm = () => {
   const dispatch = useDispatch();
 
-  // const handleAddContact = (values, { resetForm }) => {
-  //   dispatch(addContact({ ...values, id: nanoid() }));
-  //   resetForm();
-  // };
-
-  const handleAddContact = async (values, { resetForm }) => {
-    try {
-  
-      await dispatch(addContact({ ...values, id: nanoid() }));
-      resetForm();
-  
-      // const response = await dispatch(fetchContacts());
-     
-    } catch (error) {
-      console.error('Error adding contact:', error);
-    }
+   const handleAddContact = (values, { resetForm }) => {
+    dispatch(newContact({ ...values }));
+    resetForm();
   };
+
+  // const handleAddContact = async (values, { resetForm }) => {
+  //   try {
+  // // тут ніякий асінк не треба робити !!!
+  //     // await dispatch(addContact({ ...values, id: nanoid() }));
+  //     resetForm();
+  
+  //     // const response = await dispatch(fetchContacts());
+     
+  //   } catch (error) {
+  //     console.error('Error adding contact:', error);
+  //   }
+  // };
   
  
 
