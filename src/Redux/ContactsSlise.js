@@ -30,6 +30,8 @@ const handleAddFulfilled = (state, action) => {
   state.items.push(action.payload);
 };
 
+
+
 const initialState = {
   items: [],
   isLoading: false,
@@ -45,6 +47,7 @@ const ContactSlice = createSlice({
       .addCase(fetchAllContacts.fulfilled, handleAllContactsFulfilled)
       .addCase(fetchAllContacts.rejected, handleRejected)
       .addCase(newContact.fulfilled, handleAddFulfilled)
+      .addCase(newContact.rejected, handleRejected)
       .addCase(removeContact.fulfilled, handleDeleteFulfilled);
   },
 

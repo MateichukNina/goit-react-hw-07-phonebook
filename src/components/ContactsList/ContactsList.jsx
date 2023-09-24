@@ -1,29 +1,37 @@
 import { Item, List, DeleteBtn } from './ContactsList.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import {selectFilters, selectContacts} from 'Redux/selectors';
-import { useEffect } from 'react';
-import { fetchAllContacts, removeContact} from 'Redux/Operations';
+import { selectVisibleContacts} from 'Redux/selectors';
+ import { useEffect } from 'react';
+import { removeContact, fetchAllContacts} from 'Redux/Operations';
 
 
 
 export const ContactsList = () => {
-   const contacts = useSelector(selectContacts);
-const filters = useSelector(selectFilters);
+   const selectedContact = useSelector(selectVisibleContacts);
+// const filters = useSelector(selectFilters);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchAllContacts());
-  }, [dispatch]);
+   dispatch(fetchAllContacts());
+ }, [dispatch]);
 
 
 
- const selectedContact = contacts.filter((contact) =>
-   contact.name.toLowerCase().includes(filters)
- );
+//  const selectedContact = contacts.filter((contact) =>
+//    contact.name.toLowerCase().includes(filters)
+//  );
 
 
-  // const handleDeleteContact = (contactId) => {
-  //    dispatch(removeContact(contactId));
+  // const handleDeleteContact = (id) => {
+  //    dispatch(removeContact(id));
+  //  };
+
+  // const handleDeleteContact = async (id) => {
+  //   try {
+  //     await dispatch(removeContact(id));
+  //   } catch (error) {
+  //     console.error('Error deleting contact:', error);
+  //   }
   // };
 
   return (

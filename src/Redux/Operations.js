@@ -11,19 +11,19 @@ export const fetchAllContacts = createAsyncThunk('contacts/fetchAll', async (_, 
   }
 });
 
- export const newContact = createAsyncThunk('contacts/addContact', async (contact, thunkAPI) => {
+ export const newContact = createAsyncThunk('contacts/addContact', async ({ name, number }, thunkAPI) => {
    try {
-     const response = await API.addContact(contact);
-     return response.data;
+     const response = await API.addContact({ name, number });
+     return response;
    } catch (e) {
     return thunkAPI.rejectWithValue(e.message);;
    }
  });
 
- export const removeContact = createAsyncThunk('contacts/deleteContact', async (contactId, thunkAPI) => {
+ export const removeContact = createAsyncThunk('contacts/deleteContact', async (id, thunkAPI) => {
    try {
-    const response = await API.deleteContact(contactId); 
-    return response.data;
+    const response = await API.deleteContact(id); 
+    return response;
   } catch (e) {
     return thunkAPI.rejectWithValue(e.message);;
    }

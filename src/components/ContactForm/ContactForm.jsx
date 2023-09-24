@@ -9,7 +9,9 @@ import {
   Button,
 } from './ContactForm.styled';
 import { newContact} from 'Redux/Operations';
-import { useDispatch } from 'react-redux';
+import { selectContacts } from 'Redux/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const ContactSchema = Yup.object().shape({
   name: Yup.string().required('Name is Required'),
@@ -20,26 +22,29 @@ const initialValues = { name: '', number: '' };
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
-   const handleAddContact = (values, { resetForm }) => {
-    dispatch(newContact({ ...values }));
-    resetForm();
-  };
-
-  // const handleAddContact = async (values, { resetForm }) => {
-  //   try {
-  // // тут ніякий асінк не треба робити !!!
-  //     // await dispatch(addContact({ ...values, id: nanoid() }));
-  //     resetForm();
-  
-  //     // const response = await dispatch(fetchContacts());
-     
-  //   } catch (error) {
-  //     console.error('Error adding contact:', error);
-  //   }
+  //  const handleAddContact = (values, { resetForm }) => {
+  //   dispatch(newContact({ ...values }));
+  //   resetForm();
   // };
   
- 
+
+  const handleAddContact = async (values, { resetForm }) => {
+    try {
+      if (contacts.some(contact => contact.name === values.name)) {
+        alert(`${values.name} is already in contacts`);
+      } else if (contacts.some(contact => contact.number === values.number)) {
+        alert(`${values.number} is already in contacts`);
+      } else {
+        await dispatch(newContact({ ...values }));
+        resetForm();
+      }
+    } catch (error) {
+      console.error('Error adding contact:', error);
+    }
+  };
+
 
   return (
     <div>
